@@ -26,7 +26,15 @@ class RoomProvider extends Component {
 
     formatData(items){
         let tempItems = items.map(item => {
-            let id = item.sys.id;
+            //let id = item.sys.id;
+            let id = "";
+            if (item.sys && item.sys.id) {
+                id = item.sys.id;
+            } else {
+                throw new Error('An id was not provided!');
+            }
+            // use if ID if not needed 
+            // let id = item.sys && item.sys.id ? item.sys.id : '';
             let images = item.fields.images.map(image => image.fields.file.url);
 
             let room = { ...item.fields, images, id };
